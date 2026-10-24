@@ -20,7 +20,7 @@ def login(data: LoginRequest, db: Session = Depends(get_db)):
     if not user or not verify_pwd(data.password, user.password):
         return {"code": 400, "message": "账号或密码错误"}
     # 验证账号的状态
-    if user.status != 1:
+    if int(user.status) != 1:
         return {"code": 403, "message": "账号已被禁用"}
     # 创建token
     token = create_access_token(user.id)
