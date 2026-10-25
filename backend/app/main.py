@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from app.api import auth, user
+from app.api import auth, user, files
 from app.database import Base, engine
 from fastapi import HTTPException
 from starlette.middleware.cors import CORSMiddleware
@@ -11,10 +11,16 @@ from app.common.exceptions import (
     validation_excpetion_hadler,
     global_excpetion_hadler,
 )
+from fastapi.staticfiles import StaticFiles
+from app.config import UPLOAD_DIR
+
 
 Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
+
+# 挂载静态资源：/uploads/xxx.jpg → uploads/xxx.jpg
+app.mount("/uploads", StaticFiles(directory=UPLOAD_DIR), name="uploads")
 
 
 origins = [
@@ -45,6 +51,7 @@ def root():
 
 app.include_router(auth.router)
 app.include_router(user.router)
+app.include_router(files.router)
 
 
 
