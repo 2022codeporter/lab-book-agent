@@ -13,7 +13,8 @@ const router = createRouter({
         { path: 'home', name: 'Home', component: () => import('@/views/Home.vue') },
         { path: 'lab', name: 'Lab', component: () => import('@/views/Lab.vue') },
         { path: 'equ', name: 'Equipment', component: () => import('@/views/Equipment.vue') },
-        { path: 'user', name: 'User', component: () => import('@/views/User.vue') }
+        { path: 'user', name: 'User', component: () => import('@/views/User.vue') },
+        { path: 'profile', name: 'Profile', component: () => import('@/views/Profile.vue') }
       ]
     },
     { path: '/login', name: 'Login', component: () => import('@/views/Login.vue') },

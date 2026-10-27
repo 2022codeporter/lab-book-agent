@@ -10,7 +10,7 @@ from app.common.response import Response
 from app.config import UPLOAD_DIR, ALLOWED_EXTENSIONS, MAX_FILE_SIZE
 from app.schemas.file import FileResponse
 
-router = APIRouter(prefix='/files', tags=["文件管理"])
+router = APIRouter(prefix='/api/files', tags=["文件管理"])
 
 
 @router.post('/upload')
