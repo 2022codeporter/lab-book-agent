@@ -1,3 +1,5 @@
+from typing import Any
+
 from pydantic import BaseModel, ConfigDict
 
 
@@ -22,5 +24,9 @@ class UserUpdateRequest(BaseModel):
 class PasswordUpdateRequest(BaseModel):
     old_password: str
     new_password: str
+
+class PageResponse(BaseModel):
+    list: Any = []
+    total: int = 0
 
 

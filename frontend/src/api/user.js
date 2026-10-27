@@ -14,3 +14,11 @@ export function updateUserInfoApi(data) {
     data
   })
 }
+
+export function updatePasswordApi(data) {
+  return request({
+    url: '/api/user/password',
+    method: 'put',
+    data
+  })
+}

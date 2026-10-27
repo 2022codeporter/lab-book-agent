@@ -25,7 +25,8 @@
             <template #dropdown>
               <el-dropdown-menu>
                 <el-dropdown-item @click="goPerson">个人信息</el-dropdown-item>
-                <el-dropdown-item @click="handleLogout">退出登录</el-dropdown-item>
+                <el-dropdown-item @click="updatePwd">修改密码</el-dropdown-item>
+                <el-dropdown-item divided @click="handleLogout">退出登录</el-dropdown-item>
               </el-dropdown-menu>
             </template>
           </el-dropdown>
@@ -76,6 +77,10 @@ const { userInfo } = useUser()
 
 const goPerson = () => {
   router.push('/manager/profile')
+}
+
+const updatePwd = () => {
+  router.push('/manager/password')
 }
 
 const handleLogout = () => {

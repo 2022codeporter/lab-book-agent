@@ -22,7 +22,7 @@ app = FastAPI()
 # 挂载静态资源：/uploads/xxx.jpg → uploads/xxx.jpg
 app.mount("/uploads", StaticFiles(directory=UPLOAD_DIR), name="uploads")
 
-
+# 解决跨域问题
 origins = [
 	"http://localhost:5173",
 	"http://127.0.0.1:5173",
