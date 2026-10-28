@@ -14,5 +14,5 @@ def create_access_token(user_id: int) -> str:
 
 
 def decode_access_token(token: str) -> dict:
-    """解析 jwt token"""
+    """解析 jwt token，返回一个字典，字段包括 user_id, exp"""
     return jwt.decode(token, key=settings.JWT_SECRET_KEY, algorithms=[settings.JWT_ALGORITHM])
