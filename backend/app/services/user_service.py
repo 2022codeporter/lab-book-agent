@@ -13,7 +13,7 @@ def get_user(user: User) -> UserResponse:
     return UserResponse.model_validate(user)
 
 def update_user(data: UserUpdateRequest, user: User, db: Session):
-    user_dict = data.model_dump(exclude_none=True)
+    user_dict = data.model_dump(exclude_none=True, exclude={"role", "status"})
     for field, value in user_dict.items():
         setattr(user, field, value)
 

@@ -22,3 +22,34 @@ export function updatePasswordApi(data) {
     data
   })
 }
+
+export function getUserPageList(params) {
+  return request({
+    url: '/api/user/list',
+    method: 'get',
+    params
+  })
+}
+
+export function adminCreateUserApi(data) {
+  return request({
+    url: '/api/user',
+    method: 'post',
+    data
+  })
+}
+
+export function adminUpdateUserApi(userId, data) {
+  return request({
+    url: `/api/user/${userId}`,
+    method: 'put',
+    data
+  })
+}
+
+export function adminDeleteUserApi(userId) {
+  return request({
+    url: `/api/user/${userId}`,
+    method: 'delete'
+  })
+}

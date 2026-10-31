@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from app.api import auth, user, files
+from app.api import auth, user, files, lab
 from app.database import Base, engine
 from fastapi import HTTPException
 from starlette.middleware.cors import CORSMiddleware
@@ -13,9 +13,10 @@ from app.common.exceptions import (
 )
 from fastapi.staticfiles import StaticFiles
 from app.config import UPLOAD_DIR
+from app.models.lab import Lab
 
 
-Base.metadata.create_all(bind=engine)
+Base.metadata.create_all(bind=engine) # 建表
 
 app = FastAPI()
 
@@ -52,6 +53,7 @@ def root():
 app.include_router(auth.router)
 app.include_router(user.router)
 app.include_router(files.router)
+app.include_router(lab.router)
 
 
 
