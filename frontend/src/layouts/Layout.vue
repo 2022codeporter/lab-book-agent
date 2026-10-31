@@ -41,7 +41,7 @@
               <span>系统首页</span>
             </el-menu-item>
 
-            <el-menu-item index="/manager/lab">
+            <el-menu-item v-if="userInfo?.role === 'admin'" index="/manager/lab">
               <el-icon><House /></el-icon>
               <span>实验室管理</span>
             </el-menu-item>
