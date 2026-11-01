@@ -8,6 +8,14 @@ export function getLabPageList(params) {
   })
 }
 
+export function getLab(labId) {
+  // 学生根据 id 查看实验室
+  return request({
+    url: `/api/lab/${labId}`,
+    method: 'get'
+  })
+}
+
 export function createLabApi(data) {
   return request({
     url: '/api/lab',

@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 from app.common.response import Response
 from app.models.equipment import Equipment
-from app.dependencies.auth import get_current_admin
+from app.dependencies.auth import get_current_admin, get_current_user
 from app.schemas.equipment import (
     EquipmentCreateRequest,
     EquipmentUpdateRequest,
@@ -18,7 +18,7 @@ def get_equipment_list(
     page_size: int = 10,
     keywords: str | None = None,
     lab_id: int | None = None,
-    current_user: Equipment = Depends(get_current_admin),
+    current_user: Equipment = Depends(get_current_user),
     db: Session = Depends(get_db),
 ):
     res = equipment_service.get_equipment_page_list(
@@ -40,7 +40,7 @@ def update_equipment(
     equipment_id: int,
     data: EquipmentUpdateRequest,
     current_user: Equipment = Depends(get_current_admin),
-    db: Session = Depends(get_db),
+    db: Session = Depends(get_db)
 ):
     res = equipment_service.update_equipment(db, equipment_id, data)
     return Response.success(data=res)
@@ -49,7 +49,7 @@ def update_equipment(
 def delete_equipment(
     equipment_id: int,
     current_user: Equipment = Depends(get_current_admin),
-    db: Session = Depends(get_db),
+    db: Session = Depends(get_db)
 ):
     equipment_service.delete_equipment(db, equipment_id)
     return Response.success()

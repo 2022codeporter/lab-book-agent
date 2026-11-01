@@ -8,12 +8,14 @@ from app.schemas.lab import LabResponse, LabCreateRequest, LabUpdateRequest
 from app.schemas.user import PageResponse
 
 
-def get_lab_list(db: Session, page: int, page_size: int, keywords: str):
+def get_lab_list(db: Session, page: int, page_size: int, keywords: str, status: int):
     query = db.query(Lab)
     if keywords:
         query = query.filter(
             or_(Lab.name.ilike(f"%{keywords}%"), Lab.location.ilike(f"%{keywords}%"))
         )
+    if status:
+        query = query.filter(Lab.status == status)
     total = query.count()
     items = (
         query.order_by(Lab.id.desc())
@@ -25,6 +27,15 @@ def get_lab_list(db: Session, page: int, page_size: int, keywords: str):
         list=[LabResponse.model_validate(item) for item in items],
         total=total
     )
+
+def get_lab(db: Session, lab_id: int):
+    lab = db.query(Lab).filter(Lab.id == lab_id).first()
+    if not lab:
+        raise BusinessException(message="实验室不存在！")
+    return LabResponse.model_validate(lab)
+
+
+
 
 def create_lab(db: Session, data: LabCreateRequest):
     exist = db.query(Lab).filter(Lab.name == data.name).first()

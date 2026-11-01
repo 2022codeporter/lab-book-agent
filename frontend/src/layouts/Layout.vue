@@ -41,12 +41,22 @@
               <span>系统首页</span>
             </el-menu-item>
 
+            <el-menu-item index="/manager/lablist" v-if="userInfo?.role === 'student'">
+              <el-icon><OfficeBuilding /></el-icon>
+              <span>实验室列表</span>
+            </el-menu-item>
+
+            <el-menu-item index="/manager/my-reservation" v-if="userInfo?.role === 'student'">
+              <el-icon><Tickets /></el-icon>
+              <span>我的预约</span>
+            </el-menu-item>
+
             <el-menu-item v-if="userInfo?.role === 'admin'" index="/manager/lab">
               <el-icon><House /></el-icon>
               <span>实验室管理</span>
             </el-menu-item>
 
-            <el-menu-item index="/manager/equ">
+            <el-menu-item v-if="userInfo?.role === 'admin'" index="/manager/equ">
               <el-icon><Setting /></el-icon>
               <span>设备列表管理</span>
             </el-menu-item>
@@ -54,6 +64,11 @@
             <el-menu-item v-if="userInfo?.role === 'admin'" index="/manager/user">
               <el-icon><User /></el-icon>
               <span>用户管理</span>
+            </el-menu-item>
+
+            <el-menu-item index="/manager/audit-reservation" v-if="userInfo?.role === 'admin'">
+              <el-icon><DocumentChecked /></el-icon>
+              <span>预约审核</span>
             </el-menu-item>
           </el-menu>
         </el-aside>
@@ -66,6 +81,7 @@
 </template>
 
 <script setup>
+import { OfficeBuilding, Tickets, DocumentChecked } from '@element-plus/icons-vue'
 import { logout } from '@/utils/storage'
 import { useUser } from '@/utils/user'
 import { Menu as IconMenu, House, Setting, User } from '@element-plus/icons-vue'
